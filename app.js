@@ -40,11 +40,28 @@ Ext.application({
     },
 
     launch: function() {
-        // Destroy the #appLoadingIndicator element
-        Ext.fly('appLoadingIndicator').destroy();
-
-        // Initialize the main view
-        Ext.Viewport.add(Ext.create('MyApp.view.Main'));
+        var loginContainer = Ext.create('Ext.Container', {
+            itemId: 'loginContainer',
+            fullscreen: true,
+            items: [
+                {
+                    xtype: 'textfield',
+                    label: 'Login',
+                    placeHolder: 'Enter Username Here'
+                },
+                {
+                    xtype: 'textfield',
+                    label: 'Organization',
+                    itemId: 'orgField',
+                    placeHolder: 'Enter Your Organization Here'
+                },
+                {
+                    xtype: 'textfield',
+                    label: 'Password',
+                    placeHolder: 'Enter Password Here'
+                }
+            ]
+        })
     },
 
     onUpdated: function() {
