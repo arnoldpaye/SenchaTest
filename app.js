@@ -40,28 +40,54 @@ Ext.application({
     },
 
     launch: function() {
-        var loginContainer = Ext.create('Ext.Container', {
-            itemId: 'loginContainer',
+        var mainContainer = Ext.create('Ext.Container', {
             fullscreen: true,
+            defaults: {
+                style: 'margin-bottom:30px'
+            },
             items: [
                 {
-                    xtype: 'textfield',
-                    label: 'Login',
-                    placeHolder: 'Enter Username Here'
+                    itemId: 'panel1',
+                    items: [
+                        {
+                            xtype: 'textfield',
+                            label: 'Login',
+                            itemId: 'loginField',
+                            placeHolder: 'Enter Username Here',
+                        },
+                        {
+                            xtype: 'textfield',
+                            label: 'Password',
+                            placeHolder: 'Enter Password Here'
+                        }
+                    ]
                 },
                 {
-                    xtype: 'textfield',
-                    label: 'Organization',
-                    itemId: 'orgField',
-                    placeHolder: 'Enter Your Organization Here'
-                },
-                {
-                    xtype: 'textfield',
-                    label: 'Password',
-                    placeHolder: 'Enter Password Here'
+                    itemId: 'panel2',
+                    items: [
+                        {
+                            xtype: 'textfield',
+                            label: 'Organization',
+                            placeHolder: 'Enter Your Organization Here'
+                        },
+                        {
+                            xtype: 'checkboxfield',
+                            label: 'Remember Login'
+                        }
+                    ]
                 }
             ]
-        })
+        });
+
+        Ext.Function.defer(function() {
+            var myField = mainContainer.down('#loginField');
+
+            var panel1 = mainContainer.down('#panel1');
+            panel1.remove(myField, false);
+
+            var panel2 = mainContainer.down('#panel2');
+            panel2.add(myField);
+        }, 2000, this);
     },
 
     onUpdated: function() {
